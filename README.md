@@ -1,7 +1,7 @@
 niche-rt
 ========
 
-Niche's real-time traffic status monitor
+Niche's real-time traffic monitor
 
 
 Installation
