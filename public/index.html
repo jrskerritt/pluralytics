@@ -50,8 +50,19 @@
                 flex: auto;
             }
             .chart {
-                margin: 20px;
+                margin: 20px 40px;
                 border: 1px solid #ddd;
+                position: relative;
+            }
+            min,max {
+                position: absolute;
+                right: -30px;
+            }
+            min {
+                bottom: 0;
+            }
+            max {
+                top: 0;
             }
 
             .chart svg {
@@ -60,11 +71,12 @@
             }
 
             @-webkit-keyframes flashup {
-                from { text-shadow: 0 0 120px #53a63a ; }
+                from { text-shadow: 0 0 120px #53a63a; }
                 to { text-shadow: 0 0 0 #eee; }
             }
+            
             @-webkit-keyframes flashdown {
-                from { text-shadow: 0 0 120px #f00 ; }
+                from { text-shadow: 0 0 120px #f00; }
                 to { text-shadow: 0 0 0 #eee; }
             }
         </style>

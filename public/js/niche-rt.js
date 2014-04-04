@@ -52,8 +52,8 @@ function drawSvg() {
     var d = 'M 0 150';
     var columnWidth = 150/(prevVals.length-1);
 
-    var chartMax = prevVals.max(),
-        chartMin = prevVals.min(),
+    var chartMax = Math.ceil(prevVals.max()/50)*50,
+        chartMin = Math.floor(prevVals.min()/50)*50,
         delta = chartMax - chartMin,
         chartZero = (chartMin > delta/10) ? chartMin-delta/10 : 0,
         r = 150 / (chartMax - chartZero);
@@ -63,7 +63,7 @@ function drawSvg() {
     }
     d += ' L 150 150 z';
 
-    $('.chart').html('<svg width="100%" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg"  preserveAspectRatio="none"><path d="' + d + '" fill="#53a63a" stroke="none" stroke-width="0" /></svg>');
+    $('.chart').html('<min>' + chartMin + '</min><max>' + chartMax + '</max><svg width="100%" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg"  preserveAspectRatio="none"><path d="' + d + '" fill="#53a63a" stroke="none" stroke-width="0" /></svg>');
 }
 
 Array.prototype.min = function() {
