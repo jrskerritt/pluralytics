@@ -44,6 +44,15 @@
             li {
                 flex: auto;
             }
+            .chart {
+                margin: 20px;
+                border: 1px solid #ddd;
+            }
+
+            .chart svg {
+                margin: 0;
+                display: block;
+            }
 
             @-webkit-keyframes flash {
                 from { text-shadow: 0 0 100px #53a63a ; }
@@ -64,6 +73,9 @@
                 <traffic></traffic>
             </li>
         </div>
+
+        <div class="chart"></div>
+
         <script type="text/javascript" src="js/socket.io.min.js"></script>
         <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="js/niche-rt.js"></script>
