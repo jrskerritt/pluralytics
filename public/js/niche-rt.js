@@ -13,14 +13,18 @@ function getTrafficUpdate() {
 }
 
 function refreshTraffic(trafficData) {
-    var container = $('.main');
-    var template = $('.template').children().first();
+    var list = $('.main ul');
+    var total = 0;
+    list.empty();
 
-    container.empty();
     for (var site in trafficData) {
-        var template = $('.template').clone().children().first();
-        template.find('.site-text').html(site);
-        template.find('.traffic-count').html(trafficData[site]);
-        container.append(template);
+        var listItem = $('.template').children().first().clone();
+        listItem.find('site').html(site);
+        listItem.find('traffic').html(trafficData[site]);
+        list.append(listItem);
+        total += +trafficData[site];
     }
+
+    $('h1').remove();
+    $('body').prepend('<h1>' + total + '</h1>');
 }
