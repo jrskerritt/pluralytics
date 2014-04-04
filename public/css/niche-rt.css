@@ -1,0 +1,74 @@
+body {
+    padding: 0;
+    margin: 0;
+    background: #eee;
+    font: 300 100%/1.4em 'Source Sans Pro';
+}
+h1,site,traffic {
+    line-height: 1em;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+h1 {
+    font-size: 17em;
+    font-weight: 300;
+    text-align: center;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: 1;
+}
+h1.up {
+    -webkit-animation-name: flashup;
+}
+h1.down {
+    -webkit-animation-name: flashdown;
+}
+site {
+    font-size: 2em;
+    font-weight: 400;
+    display: block;
+}
+traffic {
+    font-size: 2em;
+    font-weight: 400;
+}
+ul {
+    list-style-type: none;
+    display: flex;
+    width: 60%;
+    text-align: center;
+    margin: 3em auto 0;
+}
+li {
+    flex: auto;
+}
+.chart {
+    margin: 20px 40px;
+    border: 1px solid #ddd;
+    position: relative;
+}
+min,max {
+    position: absolute;
+    right: -30px;
+}
+min {
+    bottom: 0;
+}
+max {
+    top: 0;
+}
+
+.chart svg {
+    margin: 0;
+    display: block;
+}
+
+@-webkit-keyframes flashup {
+    from { text-shadow: 0 0 120px #53a63a; }
+    to { text-shadow: 0 0 0 #eee; }
+}
+
+@-webkit-keyframes flashdown {
+    from { text-shadow: 0 0 120px #f00; }
+    to { text-shadow: 0 0 0 #eee; }
+}
