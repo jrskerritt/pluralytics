@@ -5,7 +5,7 @@ $(function() {
         refreshTraffic(res);
     });
 
-    setInterval(function(){ getTrafficUpdate(); }, 1000);
+    setInterval(function(){ getTrafficUpdate(); }, 2500);
 });
 
 function getTrafficUpdate() {
