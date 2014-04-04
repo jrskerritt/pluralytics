@@ -7,6 +7,8 @@ Niche's real-time traffic status monitor
 Installation
 ------------
 
+Install node.js http://nodejs.org/
+
 In the root of the repository, run:
 
 ```bash
