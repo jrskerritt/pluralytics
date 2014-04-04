@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:3000/');
+var socket = io.connect('http://localhost:9132/');
 
 $(function() {
     socket.on('traffic-res', function(res){
