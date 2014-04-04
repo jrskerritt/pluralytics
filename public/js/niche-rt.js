@@ -14,8 +14,10 @@ function getTrafficUpdate() {
 }
 
 function refreshTraffic(trafficData) {
-    var list = $('.main ul');
-    var total = 0;
+    var list = $('.main ul'),
+        total = 0,
+        changeClass = '';
+
     list.empty();
 
     for (var site in trafficData) {
@@ -27,7 +29,15 @@ function refreshTraffic(trafficData) {
     }
 
     $('h1').remove();
-    $('body').prepend('<h1>' + total + '</h1>');
+    if (prevVals.length) {
+        console.log(total,prevVals[prevVals.length-1]);
+        if (total > prevVals[prevVals.length-1])
+            changeClass = 'up';
+        else if (total < prevVals[prevVals.length-1])
+            changeClass = 'down';    
+    }
+
+    $('body').prepend('<h1 class="' + changeClass + '">' + total + '</h1>');
 
     prevVals.push(total);
 
@@ -40,18 +50,25 @@ function refreshTraffic(trafficData) {
 function drawSvg() {
 
     var d = 'M 0 150';
-    var columnWidth = 150/prevVals.length;
+    var columnWidth = 150/(prevVals.length-1);
 
-    var max = prevVals.max(),
-        r = 150 / max;
+    var chartMax = prevVals.max(),
+        chartMin = prevVals.min(),
+        delta = chartMax - chartMin,
+        chartZero = (chartMin > delta/10) ? chartMin-delta/10 : 0,
+        r = 150 / (chartMax - chartZero);
 
     for (i = 0; i < prevVals.length; i++) {
-        d+= ' L ' + i*columnWidth + ' ' + (150 - prevVals[i]*r); 
+        d+= ' L ' + i*columnWidth + ' ' + (150 - (prevVals[i]-chartZero)*r); 
     }
     d += ' L 150 150 z';
 
     $('.chart').html('<svg width="100%" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg"  preserveAspectRatio="none"><path d="' + d + '" fill="#53a63a" stroke="none" stroke-width="0" /></svg>');
 }
+
+Array.prototype.min = function() {
+  return Math.min.apply(null, this);
+};
 
 Array.prototype.max = function() {
   return Math.max.apply(null, this);

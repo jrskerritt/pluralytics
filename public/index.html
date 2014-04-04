@@ -21,9 +21,14 @@
                 font-size: 17em;
                 font-weight: 300;
                 text-align: center;
-                -webkit-animation-name: flash;
                 -webkit-animation-duration: 1s;
                 -webkit-animation-iteration-count: 1;
+            }
+            h1.up {
+                -webkit-animation-name: flashup;
+            }
+            h1.down {
+                -webkit-animation-name: flashdown;
             }
             site {
                 font-size: 2em;
@@ -54,8 +59,12 @@
                 display: block;
             }
 
-            @-webkit-keyframes flash {
-                from { text-shadow: 0 0 100px #53a63a ; }
+            @-webkit-keyframes flashup {
+                from { text-shadow: 0 0 120px #53a63a ; }
+                to { text-shadow: 0 0 0 #eee; }
+            }
+            @-webkit-keyframes flashdown {
+                from { text-shadow: 0 0 120px #f00 ; }
                 to { text-shadow: 0 0 0 #eee; }
             }
         </style>
