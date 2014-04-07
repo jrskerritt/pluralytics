@@ -1,6 +1,6 @@
 {
-    "name": "niche-rt",
-    "description": "Niche real-time traffic display",
+    "name": "pluralytics",
+    "description": "live traffic numbers from multiple Google Analytics realtime pages",
     "version": "0.0.1",
     "private": true,
     "dependencies": {
