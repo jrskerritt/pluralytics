@@ -1,7 +1,7 @@
-niche-rt
+pluralytics
 ========
 
-Niche's real-time traffic monitor
+Pluralytics is an Express.js application that allows you to feed live traffic numbers from multiple Google Analytics realtime pages into a single page. It displays the current traffic for each website along with an aggregated total and a graph of the total traffic over time.
 
 
 Installation
@@ -20,7 +20,7 @@ Run the app
 -----------
 
 ```bash
-node app
+node pluralytics
 ```
 
 
