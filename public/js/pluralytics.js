@@ -4,7 +4,9 @@ $(function() {
         maxHistory = 720,
         requestInterval = 2500,
         siteList = $('.main ul'),
+        topReferralsList = $('referrals ul'),
         siteTemplate = _.template('<li><site><%= name %></site><traffic><%= traffic %></traffic></li>'),
+        referralsTemplate = _.template('<% _.each(topReferrals, function (referral) { %> <li><%= referral.source %>: <%= referral.users %></li><% }); %>');
         graphTemplate = _.template('<min><%= chartMin %></min><max><%= chartMax %></max><svg width="100%" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="<%= d %>" fill="#53a63a" stroke="none" stroke-width="0" /></svg>');
 
     socket.on('traffic-res', function(res) {
@@ -16,7 +18,6 @@ $(function() {
     }, requestInterval);
 
 
-
     function getTrafficUpdate() {
         socket.emit('traffic-req');
     }
@@ -24,8 +25,8 @@ $(function() {
     function refresh(trafficData) {
         var totalTraffic = 0;
 
-        for (var siteName in trafficData) {
-            var traffic = trafficData[siteName],
+        for (var siteName in trafficData.traffic) {
+            var traffic = trafficData.traffic[siteName],
                 li = siteList.find('li:has(site:contains(' + siteName + '))');
             if (li[0])
                 updateSite(li, traffic);
@@ -35,6 +36,7 @@ $(function() {
         }
 
         updateTotalTraffic(totalTraffic);
+        updateTopReferrals(trafficData.topReferrals);
         drawGraph();
     }
 
@@ -64,6 +66,10 @@ $(function() {
         if (history.length) {
             return history[history.length - 1];
         }
+    }
+
+    function updateTopReferrals(topReferrals) {
+        topReferralsList.html(referralsTemplate({topReferrals: topReferrals}));
     }
 
     function getTrafficChangeDirection(totalTraffic) {
