@@ -46,7 +46,7 @@ function getNewTopReferrals() {
     var mergedReferrals = {};
     var mergeReferral = function (referral) {
         if (mergedReferrals[referral.source]) {
-            mergedReferrals[referral.source].users += referral.users;
+            mergedReferrals[referral.source].users += +referral.users;
         }
         else {
             mergedReferrals[referral.source] = referral;

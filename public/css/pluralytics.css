@@ -1,21 +1,44 @@
 body {
     padding: 0;
     margin: 0;
-    background: #eee;
+    background: url('../pittsburgh.jpg') no-repeat center center fixed;
+    background-size: cover;
     font: 300 100%/1.4em 'Source Sans Pro';
 }
+
+.primary {
+    display: flex;
+    margin: 20px 40px;
+}
+.primary ul,
+.primary h1 {
+    flex-grow: 2;
+}
+.primary ul {
+    margin: 3em 0 0 0;
+    padding: 0 40px;
+    list-style-type: none;
+    flex-grow: 1;
+    color: #fff;
+}
+.primary ul li {
+    overflow: hidden;
+}
+
 h1,site,traffic {
     line-height: 1em;
     margin: 0;
     padding: 0;
-    display: block;
 }
 h1 {
     font-size: 17em;
     font-weight: 300;
-    text-align: center;
     -webkit-animation-duration: 1s;
     -webkit-animation-iteration-count: 1;
+    text-align: center;
+    padding: 0 0 0.1em 0;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
 }
 h1.up {
     -webkit-animation-name: flashup;
@@ -24,32 +47,55 @@ h1.down {
     -webkit-animation-name: flashdown;
 }
 site {
-    font-size: 2em;
+    font-size: 1.5em;
+    line-height: 1.25em;
     font-weight: 400;
     display: block;
+    float: left;
+    width: 50%;
 }
 traffic {
-    font-size: 2em;
+    font-size: 1.5em;
+    line-height: 1.25em;
     font-weight: 400;
+    float: left;
+    width: 50%;
+    text-align: right;
 }
-ul {
+referrals {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    margin: 20px 40px;
+    display: block;
+}
+referrals ul {
     list-style-type: none;
     display: flex;
-    width: 60%;
-    text-align: center;
-    margin: 3em auto 0;
+    margin: 0;
+    padding: 10px 20px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.25em;
 }
-li {
+referrals li {
     flex: auto;
+}
+referrals li div {
+    display: inline-block;
+    box-sizing: border-box;
+}
+referrals li div:last-child {
+    font-weight: 400;
+    padding-left: 10px;
 }
 .chart {
     margin: 20px 40px;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.5);
     position: relative;
 }
 min,max {
     position: absolute;
     right: -30px;
+    color: #fff;
 }
 min {
     bottom: 0;
@@ -61,6 +107,7 @@ max {
 .chart svg {
     margin: 0;
     display: block;
+    opacity: 0.8;
 }
 
 @-webkit-keyframes flashup {

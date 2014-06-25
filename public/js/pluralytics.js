@@ -3,11 +3,11 @@ $(function() {
         history = [],
         maxHistory = 720,
         requestInterval = 2500,
-        siteList = $('.main ul'),
+        siteList = $('.primary ul'),
         topReferralsList = $('referrals ul'),
         siteTemplate = _.template('<li><site><%= name %></site><traffic><%= traffic %></traffic></li>'),
-        referralsTemplate = _.template('<% _.each(topReferrals, function (referral) { %> <li><%= referral.source %>: <%= referral.users %></li><% }); %>');
-        graphTemplate = _.template('<min><%= chartMin %></min><max><%= chartMax %></max><svg width="100%" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="<%= d %>" fill="#53a63a" stroke="none" stroke-width="0" /></svg>');
+        referralsTemplate = _.template('<% _.each(topReferrals, function (referral) { %> <li><div><%= referral.source %></div><div><%= referral.users %></div></li><% }); %>');
+        graphTemplate = _.template('<min><%= chartMin %></min><max><%= chartMax %></max><svg width="100%" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="<%= d %>" fill="#ffffff" stroke="none" stroke-width="0" /></svg>');
 
     socket.on('traffic-res', function(res) {
         refresh(res);
