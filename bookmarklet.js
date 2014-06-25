@@ -26,7 +26,7 @@ javascript:
                 var cells = $(val).find('td:not(:first)');
                 referrals.push({
                     source: $(cells[0]).find('span').html(),
-                    users: $(cells[1]).html()
+                    users: parseInt($(cells[1]).html(), 10)
                 });
             });
             $.ajax({

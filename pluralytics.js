@@ -21,6 +21,8 @@ var allReferrals = {};
 var topReferrals = {};
 var maxReferrals = 4;
 
+var referralLock = false;
+
 /* 
     parameters:
     site - the string of the site name
@@ -32,7 +34,8 @@ var maxReferrals = 4;
 app.post('/', function (req, res) {
     trafficData[req.body.site] = req.body.n;
     allReferrals[req.body.site] = req.body.referrals;
-    topReferrals = getNewTopReferrals();
+    topReferrals = getNewTopReferrals() || topReferrals;
+    console.log(topReferrals);
     res.send(200);
 });
 
@@ -43,10 +46,13 @@ io.sockets.on('connection', function (socket) {
 });
 
 function getNewTopReferrals() {
+    if (referralLock) return null;
+    else referralLock = true;
+
     var mergedReferrals = {};
     var mergeReferral = function (referral) {
         if (mergedReferrals[referral.source]) {
-            mergedReferrals[referral.source].users += +referral.users;
+            mergedReferrals[referral.source].users += parseInt(referral.users, 10);
         }
         else {
             mergedReferrals[referral.source] = referral;
@@ -57,9 +63,12 @@ function getNewTopReferrals() {
         _.each(allReferrals[site], mergeReferral);
     }
     
-    return _.sortBy(
+    var sortedTopReferrals = _.sortBy(
         mergedReferrals,
         function (referral) {
             return -referral.users;
         }).slice(0, maxReferrals);
+
+    referralLock = false;
+    return sortedTopReferrals;
 }
