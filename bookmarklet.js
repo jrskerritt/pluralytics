@@ -19,7 +19,7 @@ javascript:
         var fn = function () {
             var count = $('#ID-overviewCounterValue').text();
             var referrals = [];
-            $('#ID-overviewPanelSocialTable tbody tr, #ID-overviewPanelTrafficSourceNameTable tbody tr').each(function(index, val){
+            $('#ID-overviewPanelTrafficSourceNameTable tbody tr, #ID-overviewPanelSocialTable tbody tr').each(function(index, val){
                 if ($(val).children().length == 1) {
                     return false;
                 }
