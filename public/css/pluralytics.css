@@ -24,6 +24,9 @@ body {
 .primary ul li {
     overflow: hidden;
 }
+.primary ul li.frozen {
+    color: #f00;
+}
 
 h1,site,traffic {
     line-height: 1em;

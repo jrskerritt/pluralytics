@@ -5,7 +5,7 @@ $(function() {
         requestInterval = 2500,
         siteList = $('.primary ul'),
         topReferralsList = $('referrals ul'),
-        siteTemplate = _.template('<li><site><%= name %></site><traffic><%= traffic %></traffic></li>'),
+        siteTemplate = _.template('<li data-lastupdate="<%= lastupdate %>"><site><%= name %></site><traffic><%= traffic %></traffic></li>'),
         referralsTemplate = _.template('<% _.each(topReferrals, function (referral) { %> <li><div><%= referral.source %></div><div><%= referral.users %></div></li><% }); %>');
         graphTemplate = _.template('<min><%= chartMin %></min><max><%= chartMax %></max><svg width="100%" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="<%= d %>" fill="#ffffff" stroke="none" stroke-width="0" /></svg>');
 
@@ -35,17 +35,43 @@ $(function() {
             totalTraffic += +traffic;
         }
 
+        var siteListLi = siteList.find('li');
+
+        siteListLi.sort(function (a, b) {
+            var an = 1*$(a).find('traffic').text(),
+                bn = 1*$(b).find('traffic').text();
+
+            if(an > bn) {
+                return -1;
+            }
+            if(an < bn) {
+                return 1;
+            }
+            return 0;
+        });
+
+        siteListLi.detach().appendTo(siteList);
+
         updateTotalTraffic(totalTraffic);
         updateTopReferrals(trafficData.topReferrals);
         drawGraph();
     }
 
     function addSite(name, traffic) {
-        siteList.append(siteTemplate({name: name, traffic: traffic}));
+        siteList.append(siteTemplate({name: name, traffic: traffic, lastupdate: new Date().getTime()}));
     }
 
     function updateSite(li, traffic) {
+        var currentTraffic = li.find('traffic').text();
+        var currentTime = new Date().getTime();
+
         li.find('traffic').html(traffic);
+        if (traffic != currentTraffic) {
+            li.removeClass('frozen');
+            li.attr('data-lastupdate', new Date().getTime());
+        } else if (currentTime - li.attr('data-lastupdate') > 300000) { // 5 mins
+            li.addClass('frozen');
+        }
     }
 
     function updateTotalTraffic(totalTraffic) {
