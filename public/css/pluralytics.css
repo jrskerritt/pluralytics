@@ -21,11 +21,19 @@ body {
     flex-grow: 1;
     color: #fff;
 }
-.primary ul li {
-    overflow: hidden;
-}
-.primary ul li.frozen {
+.primary ul li.frozen:before {
+    content: '!';
+    border-radius: 50%;
+    background: #fff;
     color: #f00;
+    float: left;
+    margin: 5px 0 0 -30px;
+    width: 20px;
+    height: 20px;
+    clear: left;
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px;
 }
 
 h1,site,traffic {
